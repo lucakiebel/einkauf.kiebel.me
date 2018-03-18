@@ -34,7 +34,7 @@ app.get('/api/items', function(req, res) {
         if (err)
             res.send(err);
 
-        res.json(todos); /
+        res.json(todos); 
         console.log(todos);
     });
 });
