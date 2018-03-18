@@ -1,0 +1,73 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="Einkaufliste">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Einkaufsliste</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <link rel="icon" href="https://lh3.googleusercontent.com/twOma0PzclgQNrKYY0_HUR_Y53XS0oUQkVc0QupYm60umKTe5vR-HKPK6NX41Qc4h0Q"><!-- favicon -->
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:2%; }
+        #todo-list              { margin-bottom:4%; }
+        #insert-button		{ margin-bottom:2%; }
+	input.form-control	{ margin-top:2%; }
+    </style>
+
+    <!-- SPELLS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="core.js"></script>
+
+</head>
+<!-- SET THE CONTROLLER AND GET ALL TODOS -->
+<body ng-controller="mainController">
+<div class="container">
+
+    <!-- HEADER AND TODO COUNT -->
+    <div class="jumbotron text-center">
+        <h1>Einkaufsliste</h1>
+        <h2>Elemente: <span class="label label-info">{{ todos.length }}</span></h2>
+    </div>
+
+    <!-- TODO LIST -->
+    <div id="todo-list" class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+		<div class="checkbox" ng-repeat="todo in todos">
+				<label>
+					<input type="checkbox" ng-click="deleteTodo(todo._id)"> <h3> {{ todo.name }} </h3>
+					<ul><li ng-show="todo.amount"><h4>Menge: {{ todo.amount }}</h4></li><li ng-show="todo.count"><h4>Anzahl: {{ todo.count }}</h4></li><li ng-show="todo.art"><h4>Art: {{ todo.art }}</h4></li></ul>
+				</label>
+		</div>
+        </div>
+    </div>
+
+    <!-- FORM TO CREATE TODOS -->
+    <div id="todo-form" class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+            <form>
+                <div class="form-group">
+                    <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                    <input type="text" class="form-control input-lg" placeholder="Artikelname" ng-model="formData.name">
+					<input type="text" class="form-control input-lg" placeholder="Menge" ng-model="formData.amount">
+					<input type="number" min="1" max="100" placeholder="Anzahl" class="form-control input-lg" ng-model="formData.count">
+					<input type="text" class="form-control input-lg" placeholder="Art / Beschaffenheit" ng-model="formData.art" />
+                </div>
+
+                <!-- createToDo() WILL CREATE NEW TODOS -->
+                <button type="submit" id="insert-button" class="btn btn-primary btn-lg" ng-click="createTodo()">Hinzufügen</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+
